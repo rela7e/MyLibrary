@@ -24,3 +24,4 @@ def books_detail(request, book_id):
 class BookCreate(CreateView):
     model = Book
     fields = '__all__'
+    
