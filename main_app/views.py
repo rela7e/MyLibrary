@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views.generic import CreateView, UpdateView, DeleteView
 
@@ -35,3 +35,11 @@ class BookUpdate(UpdateView):
 class BookDelete(DeleteView):
     model= Book
     success_url = '/books'
+
+def add_note(request, book_id):
+    form = NoteForm(request.POST)
+    if form.is_valid():
+        new_note = form.save(commit=False)
+        new_note.book_id = book_id
+        new_note.save()
+    return redirect('detail', book_id=book_id)
