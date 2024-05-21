@@ -5,7 +5,7 @@
 
 {% for book in books %}
   <div>
-    <a href="/books/{{ book.id }}">
+    <a href="{% url 'detail' book.id %}">
     <div class ="card-content">
         <span class ="card-title">{{ book.title }}</span>
         <p>Author: {{ book.author }}</p>
