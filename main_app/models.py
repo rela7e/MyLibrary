@@ -15,10 +15,10 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'book_id': self.id})
     
-class Notes(models.Model):
-    note = models.CharField(max_length=250)
+class Note(models.Model):
+    content = models.CharField(max_length=250)
 
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.note} ({self.id})'
+        return f'{self.content} ({self.id})'
