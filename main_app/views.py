@@ -6,6 +6,8 @@ from .models import Book, Note, AssociateBookUser
 
 from .forms import NoteForm
 
+from .filters import BookFilter
+
 from django.contrib.auth import login
 
 from django.contrib.auth.forms import UserCreationForm
@@ -23,9 +25,12 @@ def about(request):
 
 def books_index(request):
     books = Book.objects.all()
-    return render(request, 'books/index.html', {
-        'books': books
-    })
+    if request.GET:
+        book_filter = BookFilter(request.GET, queryset=books)
+        books = book_filter.qs
+    else:
+        book_filter = BookFilter(queryset=books)
+    return render(request, 'books/index.html', {'filter': book_filter, 'books': books})
 
 def books_detail(request, book_id):
     book = Book.objects.get(id=book_id)

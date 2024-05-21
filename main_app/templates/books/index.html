@@ -3,7 +3,12 @@
 
 <h1>Book List</h1>
 
-{% for book in books %}
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% for book in filter.qs %}
   <div>
     <a href="{% url 'detail' book.id %}">
     <div class ="card-content">
@@ -12,6 +17,8 @@
     </div>
     </a>
   </div>
+{% empty %}
+  <p>No books found.</p>
 {% endfor %}
 
 {% endblock %}
