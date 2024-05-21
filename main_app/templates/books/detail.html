@@ -18,6 +18,12 @@
   </div>
 </div>
 
+<form method="POST">
+    {% csrf_token %}
+    {{ note_form.as_p }}
+    <input type="submit" class="btn" value="Add Note">
+  </form>
+
 <div>
     <h2>Notes:</h2>
     <ul>
