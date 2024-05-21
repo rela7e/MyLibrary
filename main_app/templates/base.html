@@ -17,7 +17,14 @@
               <ul class="right">
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'books_index' %}">View all My Books</a></li>
+                <li><a href="{% url 'books_index' %}">View all Books</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'books_create' %}">Add a Book</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
               </ul>
             </div>
           </nav>

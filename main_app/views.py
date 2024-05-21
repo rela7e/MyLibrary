@@ -6,6 +6,8 @@ from .models import Book
 
 from .forms import NoteForm
 
+from django.contrib.auth.forms import UserCreationForm
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -43,3 +45,16 @@ def add_note(request, book_id):
         new_note.book_id = book_id
         new_note.save()
     return redirect('detail', book_id=book_id)
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else: error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)    
