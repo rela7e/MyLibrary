@@ -5,3 +5,5 @@ class NoteForm(ModelForm):
     class Meta:
         model = Note
         fields = ['content']
+        labels = { 'content': ''}
+

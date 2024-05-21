@@ -27,8 +27,10 @@ def books_index(request):
 
 def books_detail(request, book_id):
     book = Book.objects.get(id=book_id)
+    user = request.user
+    notes = book.note_set.filter(user=user)
     note_form = NoteForm()
-    return render(request, 'books/detail.html', { 'book': book, 'note_form': note_form })
+    return render(request, 'books/detail.html', { 'book': book, 'note_form': note_form, 'notes': notes })
 
 class BookCreate(CreateView):
     model = Book
