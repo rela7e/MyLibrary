@@ -9,7 +9,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     published = models.IntegerField
-    ISBN = models.TextField(unique=True)
+    isbn = models.TextField(unique=True, default='')
 
     def __str__(self):
         return f'{self.title} ({self.id})'
