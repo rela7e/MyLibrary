@@ -18,4 +18,13 @@
   </div>
 </div>
 
+<div>
+    <h2>Notes:</h2>
+    <ul>
+        {% for note in book.note_set.all %}
+            <li>{{ note.content }}</li>
+        {% endfor %}
+    </ul> 
+</div>
+
 {% endblock %}
