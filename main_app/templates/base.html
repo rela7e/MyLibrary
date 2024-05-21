@@ -20,7 +20,12 @@
                 <li><a href="{% url 'books_index' %}">View all Books</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'books_create' %}">Add a Book</a></li>
-                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                <li>
+                  <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">LOG OUT</button>
+                  </form>
+                </li>
                 {% else %}
                 <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 <li><a href="{% url 'login' %}">Log In</a></li>
