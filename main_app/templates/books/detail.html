@@ -11,6 +11,10 @@
         <p>Published: {{ book.published }}</p>
         <p>Description: {{ book.description }}</p>
     </div>
+    <div class="card-action">
+        <a href="{% url 'books_update' cat.id %}">Edit</a>
+        <a href="{% url 'books_delete' cat.id %}">Delete</a>
+    </div>
   </div>
 </div>
 
