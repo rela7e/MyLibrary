@@ -16,6 +16,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -45,7 +47,7 @@ class BookCreate(CreateView):
     
 class BookUpdate(UpdateView):
     model = Book
-    fields = ['description']
+    fields = '__all__'
 
 class BookDelete(DeleteView):
     model= Book
@@ -75,3 +77,21 @@ def signup(request):
 def my_books(request):
     user_books = AssociateBookUser.objects.filter(user=request.user)
     return render(request, 'my_books.html', {'user_books': user_books})
+
+def add_to_my_books(request):
+    if request.method == 'POST':
+        book_id = request.POST.get('book_id')
+        book = get_object_or_404(Book, id=book_id)
+        AssociateBookUser.objects.create(user=request.user, book=book)
+        return redirect('books_index')
+    else:
+        pass
+
+def unassoc_book(request):
+    if request.method == 'POST':
+        book_id = request.POST.get('book_id')
+        association = get_object_or_404(AssociateBookUser, user=request.user, book_id=book_id)
+        association.delete()
+        return redirect('my_books') 
+    else:
+        pass
