@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class='bitc'>
 <h1>Book Details</h1>
 
 <div class="card">
@@ -19,8 +20,8 @@
         </p>
     </div>
     <div class="card-action">
-        <a href="{% url 'books_update' book.id %}">Edit</a>
-        <a href="{% url 'books_delete' book.id %}">Delete</a>
+        <a href="{% url 'books_update' book.id %}">Edit Book</a>
+        <a href="{% url 'books_delete' book.id %}">Delete Book</a>
     </div>
   </div>
 </div>
@@ -48,6 +49,7 @@
             </li>
         {% endfor %}
     </ul> 
+</div>
 </div>
 
 {% endblock %}
