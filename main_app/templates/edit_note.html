@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div>
+    <h2>Book Details</h2>
+    <p>Title: {{ note.book.title }}</p>
+    <p>Author: {{ note.book.author }}</p>
+    <p>
+        {% if note.book.isbn %}
+        <img src="https://covers.openlibrary.org/b/isbn/{{ note.book.isbn }}-M.jpg" alt="Book Cover">
+        {% else %}
+        <p>No cover available</p>
+        {% endif %}
+    </p>
+</div>
+</div>
+
+<h1>Edit Note</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+
+{% endblock %}

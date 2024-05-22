@@ -53,11 +53,13 @@ class BookDelete(DeleteView):
     model= Book
     success_url = '/books'
 
+@login_required
 def add_note(request, book_id):
     form = NoteForm(request.POST)
     if form.is_valid():
         new_note = form.save(commit=False)
         new_note.book_id = book_id
+        new_note.user = request.user
         new_note.save()
     return redirect('detail', book_id=book_id)
 
@@ -95,3 +97,20 @@ def unassoc_book(request):
         return redirect('my_books') 
     else:
         pass
+
+def edit_note(request, note_id):
+    note = get_object_or_404(Note.objects.select_related('book'), id=note_id)
+    if request.method == 'POST':
+        form = NoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect('detail', book_id=note.book.id)  
+    else:
+        form = NoteForm(instance=note)
+    return render(request, 'edit_note.html', {'form': form, 'note': note})
+
+def delete_note(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+    book_id = note.book.id
+    note.delete()
+    return redirect('detail', book_id=book_id)

@@ -25,7 +25,7 @@
   </div>
 </div>
 
-<form action="{% url 'add_note' book.id %} method="POST">
+<form action="{% url 'add_note' book_id=book.id %}" method="POST">
     {% csrf_token %}
     {{ note_form.as_p }}
     <input type="submit" class="btn" value="Add Note">
@@ -35,7 +35,17 @@
     <h2>Notes:</h2>
     <ul>
         {% for note in notes %}
-            <li>{{ note.content }}</li>
+            <li>
+                {{ note.content }}
+                <form action="{% url 'edit_note' note.id %}" method="GET" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="{% url 'delete_note' note.id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
         {% endfor %}
     </ul> 
 </div>
