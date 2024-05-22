@@ -139,3 +139,21 @@ html, body {
 .anb {
   display: inline-block;
 }
+
+.nb {
+  text-align: center; 
+}
+
+.nb button {
+  margin: 0 5px; 
+}
+
+.al {
+  color: inherit;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.al:hover {
+  text-decoration: underline; 
+}

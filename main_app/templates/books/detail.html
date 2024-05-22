@@ -20,8 +20,8 @@
         </p>
     </div>
     <div class="card-action">
-        <a href="{% url 'books_update' book.id %}">Edit Book</a>
-        <a href="{% url 'books_delete' book.id %}">Delete Book</a>
+        <a href="{% url 'books_update' book.id %}" class="al">Edit Book</a>
+        <a href="{% url 'books_delete' book.id %}" class="al">Delete Book</a>
     </div>
   </div>
 </div>
@@ -38,6 +38,7 @@
         {% for note in notes %}
             <li>
                 {{ note.content }}
+                <div class="nb">
                 <form action="{% url 'edit_note' note.id %}" method="GET" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit">Edit</button>
@@ -46,6 +47,7 @@
                     {% csrf_token %}
                     <button type="submit">Delete</button>
                 </form>
+                </div>
             </li>
         {% endfor %}
     </ul> 
