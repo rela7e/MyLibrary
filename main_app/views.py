@@ -71,3 +71,7 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)    
+
+def my_books(request):
+    user_books = AssociateBookUser.objects.filter(user=request.user)
+    return render(request, 'my_books.html', {'user_books': user_books})
