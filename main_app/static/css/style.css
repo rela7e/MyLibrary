@@ -9,6 +9,8 @@
 
 .container {
   padding-top: 60px;
+  font-weight: bold;
+  color: white;
 }
 
 .nav-wrapper {
