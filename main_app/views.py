@@ -90,8 +90,11 @@ def add_to_my_books(request):
     if request.method == 'POST':
         book_id = request.POST.get('book_id')
         book = get_object_or_404(Book, id=book_id)
-        AssociateBookUser.objects.create(user=request.user, book=book)
-        return redirect('books_index')
+        if not request.user.associatebookuser_set.filter(book=book).exists():
+            AssociateBookUser.objects.create(user=request.user, book=book)
+            return redirect('books_index')
+        else:
+            return redirect('books_index')
     else:
         pass
 
