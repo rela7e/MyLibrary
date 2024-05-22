@@ -13,7 +13,7 @@
         <p>Description: {{ book.description }}</p>
         <p>
             {% if book.isbn %}
-            <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg" alt="Book Cover">
+            <img class="book-cover" src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg" alt="Book Cover">
             {% else %}
             <p>No cover available</p>
             {% endif %}
@@ -29,7 +29,7 @@
 <form action="{% url 'add_note' book_id=book.id %}" method="POST">
     {% csrf_token %}
     {{ note_form.as_p }}
-    <input type="submit" class="btn" value="Add Note">
+    <input type="submit" class="btn anb" value="Add Note">
 </form>
 
 <div>
