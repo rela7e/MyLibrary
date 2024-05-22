@@ -157,3 +157,25 @@ html, body {
 .al:hover {
   text-decoration: underline; 
 }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container h1 {
+  text-align: center;
+}
+
+.form-container form {
+  text-align: center;
+}
+
+.form-container table {
+  margin: 0 auto; 
+}
+
+.form-container .btn {
+  margin-top: 10px; 
+}

@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<div class="form-container">
 {% if object %}
   <h1>Edit <span>{{ object.name }}</span></h1>
 {% else %}
@@ -15,5 +16,6 @@
     </table>
     <input type="submit" value="Submit!" class="btn">
 </form>
+</div>
 
 {% endblock %}
