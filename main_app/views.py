@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .models import Book, Note, AssociateBookUser
 
-from .forms import NoteForm
+from .forms import NoteForm, CustomUserCreationForm
 
 from .filters import BookFilter
 
@@ -72,17 +72,13 @@ def add_note(request, book_id):
     return redirect('detail', book_id=book_id)
 
 def signup(request):
-    error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
-        else: error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)    
+            form.save()
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/signup.html', {'form': form})  
 
 @login_required
 def my_books(request):

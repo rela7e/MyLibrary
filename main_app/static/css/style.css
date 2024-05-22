@@ -99,3 +99,29 @@ html, body {
   align-items: center;
 }
 
+.signup-container {
+  text-align: center;
+}
+
+.signup-container form {
+  display: inline-block;
+  margin-top: 20px; 
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  width: 150px; 
+  margin-right: 10px;
+  text-align: right;
+}
+
+.form-row input {
+  flex: 1; 
+  width: 100%; 
+  box-sizing: border-box; 
+}

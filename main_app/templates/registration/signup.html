@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="signup-container">
 <h1>Sign Up</h1>
 
 <p class="red-text">{{ error_message }}</p>
 
-<form method="POST" action="{% url 'signup' %}">
+<form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn" value="Sign Up">
+  <div class="form-row">
+      <label for="id_username">Username:</label>
+      {{ form.username }}
+  </div>
+  <div class="form-row">
+      <label for="id_password1">Password:</label>
+      {{ form.password1 }}
+  </div>
+  <div class="form-row">
+      <label for="id_password2">Confirm Password:</label>
+      {{ form.password2 }}
+  </div>
+  <button type="submit">Sign Up</button>
 </form>
+</div>
 
 {% endblock %}
