@@ -21,13 +21,10 @@
         <p>Author: {{ book.author }}</p>
         {% if user.is_authenticated %}
          {% if not user.associatebookuser_set.filter(book=book).exists %}
-         <form method="post" action="{% url 'add_to_my_books' %}">
+        <form method="post" action="{% url 'add_to_my_books' %}">
           {% csrf_token %}
           <input type="hidden" name="book_id" value="{{ book.id }}">
-          {% if book_added %}
-            <input type="hidden" name="book_added" value="True">
-          {% endif %}
-          <button type="submit" {% if book_added %} disabled {% endif %}>Add to My Books</button>
+          <button type="submit">Add to My Books</button>
         </form>
          {% endif %}
         {% endif %}
