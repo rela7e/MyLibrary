@@ -28,10 +28,18 @@ def about(request):
 def books_index(request):
     books = Book.objects.all()
     if request.GET:
+        search_criteria = request.GET.get('search_criteria')
+        query = request.GET.get('query')
+        if search_criteria and query:
+            if search_criteria == 'title':
+                books = books.filter(title__icontains=query)
+            elif search_criteria == 'author':
+                books = books.filter(author__icontains=query)
         book_filter = BookFilter(request.GET, queryset=books)
         books = book_filter.qs
     else:
         book_filter = BookFilter(queryset=books)
+        books = book_filter.qs
     return render(request, 'books/index.html', {'filter': book_filter, 'books': books})
 
 def books_detail(request, book_id):

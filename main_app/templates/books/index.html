@@ -4,8 +4,12 @@
 <h1>Book List</h1>
 
 <form method="get">
-    {{ filter.form.as_p }}
-    <button type="submit">Search</button>
+  <select name="search_criteria">
+      <option value="title">Title</option>
+      <option value="author">Author</option>
+  </select>
+  <input type="text" name="query" placeholder="Search...">
+  <button type="submit">Search</button>
 </form>
 
 {% for book in filter.qs %}
