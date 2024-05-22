@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>My Books</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search by title or author" value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+{% for book in user_books %}
+  <div>
+    <a href="{% url 'detail' book.book.id %}">
+    <div class="card-content">
+        <span class="card-title">{{ book.book.title }}</span>
+        <p>Author: {{ book.book.author }}</p>
+    </div>
+    </a>
+  </div>
+{% empty %}
+  <p>No books found.</p>
+{% endfor %}
+
+{% endblock %}
