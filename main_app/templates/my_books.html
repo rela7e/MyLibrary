@@ -4,10 +4,6 @@
 
 <h1>My Books</h1>
 
-<form method="get">
-    <input type="text" name="q" placeholder="Search by title or author" value="{{ request.GET.q }}">
-    <button type="submit">Search</button>
-</form>
 
 {% for book in user_books %}
   <div>

@@ -41,15 +41,15 @@ def books_detail(request, book_id):
     note_form = NoteForm()
     return render(request, 'books/detail.html', { 'book': book, 'note_form': note_form, 'notes': notes })
 
-class BookCreate(CreateView):
+class BookCreate(LoginRequiredMixin, CreateView):
     model = Book
     fields = '__all__'
     
-class BookUpdate(UpdateView):
+class BookUpdate(LoginRequiredMixin, UpdateView):
     model = Book
     fields = '__all__'
 
-class BookDelete(DeleteView):
+class BookDelete(LoginRequiredMixin, DeleteView):
     model= Book
     success_url = '/books'
 
@@ -76,10 +76,12 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)    
 
+@login_required
 def my_books(request):
     user_books = AssociateBookUser.objects.filter(user=request.user)
     return render(request, 'my_books.html', {'user_books': user_books})
 
+@login_required
 def add_to_my_books(request):
     if request.method == 'POST':
         book_id = request.POST.get('book_id')
@@ -89,6 +91,7 @@ def add_to_my_books(request):
     else:
         pass
 
+@login_required
 def unassoc_book(request):
     if request.method == 'POST':
         book_id = request.POST.get('book_id')
@@ -98,6 +101,7 @@ def unassoc_book(request):
     else:
         pass
 
+@login_required
 def edit_note(request, note_id):
     note = get_object_or_404(Note.objects.select_related('book'), id=note_id)
     if request.method == 'POST':
@@ -109,6 +113,7 @@ def edit_note(request, note_id):
         form = NoteForm(instance=note)
     return render(request, 'edit_note.html', {'form': form, 'note': note})
 
+@login_required
 def delete_note(request, note_id):
     note = get_object_or_404(Note, id=note_id)
     book_id = note.book.id
