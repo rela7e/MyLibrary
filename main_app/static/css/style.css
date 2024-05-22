@@ -55,3 +55,9 @@ html, body {
   background-repeat: no-repeat;
   height: 100%;
 }
+
+.about-text {
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
